@@ -23,7 +23,8 @@ if(!isset($_SESSION['sess_user']) || ($_SESSION['sess_role'] != "Admin" && $_SES
     $sql = mysqli_prepare($conn, "
     SELECT id, oudCode, naam, korteInhoud, merk, aankoopDatum, foto, beschikbaar, specialeAanvraag, isArchief, archiefDatum  
     FROM vzwballonneke.speelgoed 
-    WHERE doelgroepId = ?;");
+    WHERE doelgroepId = ?
+    ORDER BY id desc;");
     mysqli_stmt_bind_param($sql, 'i', $_SESSION['sess_doelgroep']);
     mysqli_stmt_execute($sql);
     mysqli_stmt_store_result($sql);
