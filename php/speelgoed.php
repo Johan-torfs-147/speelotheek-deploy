@@ -5,7 +5,7 @@ session_start();
 if(!isset($_SESSION['sess_user']) || ($_SESSION['sess_role'] != "Admin" && $_SESSION['sess_role'] != "Gebruiker")){
     $json = '{"ok": 0}';
 } else {
-    // Connect to DB
+   // Connect to DB
     $servername = "localhost";
     $username = "vzwballonneke";
     $password = "RCwgd8bfh9Gu";

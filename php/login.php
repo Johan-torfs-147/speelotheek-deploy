@@ -32,7 +32,7 @@ if ($contentType === "application/json") {
 
         // Set query
         $sql = mysqli_prepare($conn, "SELECT id, naam, email, doelgroepId, rol FROM vzwballonneke.gebruiker
-                WHERE (naam = ? OR email = ?) AND wachtwoord = ? AND rol IN ('Gebruiker', 'Admin') AND isArchief = 0");
+                WHERE (BINARY naam = ? OR BINARY email = ?) AND BINARY wachtwoord = ? AND BINARY rol IN ('Gebruiker', 'Admin') AND isArchief = 0");
         mysqli_stmt_bind_param($sql, 'sss', $user, $user, $pass);
         mysqli_stmt_execute($sql);
         mysqli_stmt_store_result($sql);
