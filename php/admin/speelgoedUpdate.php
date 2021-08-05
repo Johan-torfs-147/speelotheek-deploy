@@ -29,6 +29,7 @@ if(!isset($_SESSION['sess_user']) || $_SESSION['sess_role'] != "Admin"){
         $leeftijd = $_POST['leeftijd'];
         $subCategorieen = $_POST['subCategorieen'];
         $merk = "" . $_POST['merk'] != "" ? $_POST['merk'] : null;
+        $leverancier = "" . $_POST['leverancier'] != "" ? $_POST['leverancier'] : null;
         $aankoopDatum = "" . $_POST['aankoopDatum'] != "" ? $_POST['aankoopDatum'] : null;
         $inhoud = array();
         foreach ($_POST['inhoud'] as $item) {
@@ -100,18 +101,20 @@ if(!isset($_SESSION['sess_user']) || $_SESSION['sess_role'] != "Admin"){
                 naam = ?,
                 korteInhoud = ?,
                 merk = ?,
+                leverancier = ?,
                 aankoopDatum = ?,
                 foto = ?,
                 beschikbaar = ?,
                 specialeAanvraag = ?
             WHERE id = ?;"
         );
-        mysqli_stmt_bind_param($sql, 'sisssssiii',
+        mysqli_stmt_bind_param($sql, 'sissssssiii',
             $oudCode,
             $doelgroep,
             $titel,
             $korteInhoud,
             $merk,
+            $leverancier,
             $aankoopDatum,
             $foto,
             $beschikbaar,
@@ -280,6 +283,7 @@ if(!isset($_SESSION['sess_user']) || $_SESSION['sess_role'] != "Admin"){
             $json .= ', "naam": "' . $titel . '"';
             $json .= ', "korteInhoud": "' . $korteInhoud . '"';
             $json .= ', "merk": "' . $merk . '"';
+            $json .= ', "leverancier": "' . $leverancier . '"';
             $json .= ', "aankoopDatum": "' . $aankoopDatum . '"';
             $json .= ', "foto": "' . $foto . '"';
             $json .= ', "beschikbaar": ' . $beschikbaar;

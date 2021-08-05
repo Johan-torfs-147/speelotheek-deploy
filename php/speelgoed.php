@@ -21,7 +21,7 @@ if(!isset($_SESSION['sess_user']) || ($_SESSION['sess_role'] != "Admin" && $_SES
 
     // Set query
     $sql = mysqli_prepare($conn, "
-    SELECT id, oudCode, naam, korteInhoud, merk, aankoopDatum, foto, beschikbaar, specialeAanvraag, isArchief, archiefDatum  
+    SELECT id, oudCode, naam, korteInhoud, merk, leverancier, aankoopDatum, foto, beschikbaar, specialeAanvraag, isArchief, archiefDatum  
     FROM vzwballonneke.speelgoed 
     WHERE doelgroepId = ?
     ORDER BY id desc;");
@@ -31,7 +31,7 @@ if(!isset($_SESSION['sess_user']) || ($_SESSION['sess_role'] != "Admin" && $_SES
 
     $json = '{"ok": 1';
     if (mysqli_stmt_num_rows($sql) > 0) {
-        mysqli_stmt_bind_result($sql, $id, $oudCode, $naam, $korteInhoud, $merk, $aankoopDatum, $foto, $beschikbaar, $specialeAanvraag, $isArchief, $archiefDatum);
+        mysqli_stmt_bind_result($sql, $id, $oudCode, $naam, $korteInhoud, $merk, $leverancier, $aankoopDatum, $foto, $beschikbaar, $specialeAanvraag, $isArchief, $archiefDatum);
 
         $json .= ', "speelgoed": [';
         $first= true;
@@ -44,6 +44,7 @@ if(!isset($_SESSION['sess_user']) || ($_SESSION['sess_role'] != "Admin" && $_SES
             $json .= ', "naam": "' . $naam . '"';
             $json .= ', "korteInhoud": "' . $korteInhoud . '"';
             $json .= ', "merk": "' . $merk . '"';
+            $json .= ', "leverancier": "' . $leverancier . '"';
             $json .= ', "aankoopDatum": "' . $aankoopDatum . '"';
             $json .= ', "foto": "' . $foto . '"';
             $json .= ', "beschikbaar": ' . $beschikbaar;
