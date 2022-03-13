@@ -9,7 +9,11 @@ function handleFile($type, $fileName, $fileTempName): string {
             $target_dir = "/bijlages/";
             break;
     }
-    $resultPath = $target_dir . basename($fileName);
+    preg_match('/\.[a-zA-z0-9]+$/', $fileName, $matches);
+    $extension = $matches[0];
+    $uniqueFilename = preg_replace("/\.[a-zA-z0-9]+$/", "", basename($fileName)) . uniqid() . $extension;
+    $resultPath = $target_dir . $uniqueFilename;
+    // $resultPath = $target_dir . basename($fileName);
     if (move_uploaded_file($fileTempName, $_SERVER['DOCUMENT_ROOT'] . $resultPath))
         return $resultPath;
     return 0;
